@@ -13,7 +13,7 @@ import oyaml as yaml
 import argparse
 import copy
 from scipy.stats import chi2
-from plotBinnedSigStr import xlabels, varDic, lastBins, find1Sig, getNLL, getBins, getPred, ePredLDict
+from plotBinnedSigStr import xlabels, varDic, lastBins, find1Sig, getNLL, getBins, cutStr, getPred, ePredLDict, drawCMSLogo, drawIntLumi
 from plotInclusiveScan import findUpDown
 
 def main(options):
@@ -22,16 +22,16 @@ def main(options):
            'font.family': 'sans-serif',
            'font.sans-serif': ['Helvetica'],
            'pdf.fonttype': 42,
-           'axes.labelsize': 16,
-           'font.size': 16,
+           'axes.labelsize': 22,
+           'font.size': 20,
            'pgf.rcfonts': True,
-           'text.latex.preamble': r"\usepackage{bm, xspace, amsmath}"}
+           'text.latex.preamble': r"\usepackage{bm, xspace, amsmath, heppennames2}"}
 
     plt.rcParams.update(rcP)
     predColors = list(cm.Dark2.colors)
     systColor = 'dodgerblue'
     with open(options.configFile, 'r') as f:
-        config = yaml.load(f)
+        config = yaml.load(f, Loader=yaml.FullLoader)
         f.close()
 
     print(config)
@@ -86,6 +86,7 @@ def main(options):
         preds[key] = (binns[0][itm['bin']+1] - binns[0][itm['bin']]) * getPred(pred, mass, 1, weights=[1., 2.3, 1.])[0]
         errsPred[key] = preds[key] * errs[key]
         errsSyst[key] = preds[key] * errsSyst[key]
+        errsStat[key] = preds[key] * errsStat[key]
         with open(itm['thErrFile'], 'rb') as f:
             thErr = pkl.load(f)[:, itm['bin']]
             f.close()
@@ -125,6 +126,14 @@ def main(options):
         errsThPlot.append(errsTh[key])
         errsSystPlot.append(errsSyst[key])
         yPoss.append(i+offs)
+
+    if options.dumpData:
+        pkl.dump({key: cvals[key] * preds[key] for key in cvals.keys()}, open('{}/result_fidXS.pkl'.format(options.outDir), 'wb'))
+        pkl.dump(errsPred, open('{}/resultUnc_fidXS.pkl'.format(options.outDir), 'wb'))
+        pkl.dump(errsSyst, open('{}/resultUncSyst_fidXS.pkl'.format(options.outDir), 'wb'))
+        pkl.dump(errsStat, open('{}/resultUncStat_fidXS.pkl'.format(options.outDir), 'wb'))
+        pkl.dump(preds, open('{}/resultExp_fidXS.pkl'.format(options.outDir), 'wb'))
+        pkl.dump(errsTh, open('{}/resultExpUnc_fidXS.pkl'.format(options.outDir), 'wb'))
     cvPlot = np.array(cvPlot)
     errsPlot = np.abs(np.array(errsPlot).T)
     errsSystPlot = np.array(errsSystPlot)
@@ -133,11 +142,11 @@ def main(options):
     print(cvPlot)
     print(yPoss)
     print(errsSystPlot)
-    (_,caps,_) = pt.errorbar(yPoss, cvPlot, yerr=errsPlot, marker='.', linestyle='none', markersize=8, capsize=3, linewidth=1, color='black', label=r'Data, stat$\oplus$syst unc.')
+    (_,caps,_) = pt.errorbar(yPoss, cvPlot, yerr=errsPlot, marker='.', linestyle='none', markersize=8, capsize=3, linewidth=2, color='black', label=r'Data, stat$\oplus$syst unc.', zorder=4)
     for cap in caps:
         cap.set_markeredgewidth(0)
     for i, prd in enumerate(predsPlot):
-        pt.plot([yPoss[i]-0.4, yPoss[i]+0.4], [prd, prd], '-', color=predColors[0], label=ePredLDict['nominal'])
+        pt.plot([yPoss[i]-0.4, yPoss[i]+0.4], [prd, prd], '-', color=predColors[0], label=ePredLDict['nominal'], linewidth=3)
     for i, cv in enumerate(cvPlot):
         pt.text(yPoss[i], (cv+errsPlot[1, i])*1.1, r'${{{0:.2f}}}_{{\,-{1:.2f}}}^{{\,+{2:.2f}}}$'.format(cv, errsPlot[0, i], errsPlot[1, i]), ha='center', va='bottom')
     errorboxesTh = [matplotlib.patches.Rectangle((x-xe[0], y-ye[0]), xe.sum(), ye.sum()) for x, y, xe, ye in zip(yPoss, predsPlot, 0.4*np.ones_like(errsThPlot), errsThPlot)]
@@ -159,25 +168,27 @@ def main(options):
             LegHandlesUpd.append(LegHandles[i])
             lblCache.append(LegLabels[i])
     legPatch = matplotlib.patches.Patch(edgecolor=predColors[0], facecolor='None', hatch=hatchstr[:int(len(hatchstr)/2)], linewidth=0, zorder=3)
-    legLine = mlines.Line2D([], [], color=predColors[0], marker='|', linestyle='None', zorder=3, markeredgewidth=1, markersize=10)
+    legLine = mlines.Line2D([], [], color=predColors[0], linestyle='-', zorder=3, markeredgewidth=1, linewidth=2)
     legPatchSyst = matplotlib.patches.Patch(edgecolor='None', facecolor=systColor, alpha=0.5, zorder=3)
     LegHandlesUpd.append(legPatchSyst)
     LegLabelsUpd.append(r'syst unc.')
     LegHandlesUpd[LegLabelsUpd.index(ePredLDict['nominal'])] = (legPatch, legLine)
-    pt.legend(labels=LegLabelsUpd, handles=LegHandlesUpd, fontsize=14, framealpha=0)
+    pt.legend(labels=LegLabelsUpd, handles=LegHandlesUpd, framealpha=0)
     pt.set_xlim((-1,yPoss.shape[0]))
     pt.xaxis.set_major_locator(NullLocator())
     pt.xaxis.set_minor_locator(MultipleLocator(2))
     pt.set_xticks(yPoss)
-    pt.set_xticklabels(tckLbls, rotation=50)
+    pt.set_xticklabels(tckLbls, rotation=90)
     # pt.invert_xaxis()
     pt.set_yscale('log')
-    pt.set_ylabel(r'$\boldsymbol{\sigma_{fid}}\left(\textnormal{fb}\right)$', loc='top')
+    pt.set_ylabel(r'$\boldsymbol{\sigma_{\text{fid}}}\left(\textnormal{fb}\right)$', loc='top')
     pt.set_ylim((pt.get_ylim()[0], 10**1.3*np.max(cvPlot+errsPlot[1,:])))
-    fig.text(0.04, 0.965, r'\textbf{CMS} \textit{Preliminary}', fontsize=18)
-    fig.text(0.87, 0.965, r'138\mbox{\ensuremath{\,\text{fb}^{-1}}}\xspace (13\ensuremath{\,\text{Te\hspace{-.08em}V}}\xspace)', fontsize=18)
-    fig.savefig('/eos/home-t/threiten/www/plots/Hgg/plotFidXS_flipped.png', bbox_inches='tight')
-    fig.savefig('/eos/home-t/threiten/www/plots/Hgg/plotFidXS_flipped.pdf', bbox_inches='tight')
+    pt.text(0.01, 0.97, cutStr['Pt'], fontsize=20, va='top', ha='left', transform=pt.transAxes)
+    if options.cmsText is not None:
+        drawCMSLogo(pt, opt=options.cmsText, fs=28)
+    drawIntLumi(pt, intL=137, fs=28)
+    fig.savefig('{}/plotFidXS_flipped.png'.format(options.outDir), bbox_inches='tight')
+    fig.savefig('{}/plotFidXS_flipped.pdf'.format(options.outDir), bbox_inches='tight')
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -186,7 +197,8 @@ if __name__ == "__main__":
         '--outDir', '-o', action='store', type=str, required=True)
     requiredArgs.add_argument(
         '--configFile', '-c', action='store', type=str, required=True)
-    # optionalArgs = parser.add_argument_group()
+    optionalArgs = parser.add_argument_group()
+    optionalArgs.add_argument('--cmsText', action='store', type=str)
     # optionalArgs.add_argument(
     #     '--filename', '-f', action='store', type=str)
     # optionalArgs.add_argument(
@@ -199,8 +211,8 @@ if __name__ == "__main__":
     #     '--cap', '-c', action='store', type=float)
     # optionalArgs.add_argument(
     #     '--ylog', action='store_true', default=False)
-    # optionalArgs.add_argument(
-    #     '--xlog', action='store_true', default=False)
+    optionalArgs.add_argument(
+        '--dumpData', action='store_true', default=False)
     # optionalArgs.add_argument(
     #     '--showSyst', action='store_true', default=False)
     # optionalArgs.add_argument(

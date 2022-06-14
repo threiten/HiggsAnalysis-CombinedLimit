@@ -11,11 +11,11 @@ import pickle as pkl
 import oyaml as yaml
 import argparse
 import copy
-from plotBinnedSigStr import getNLL, getBins, getPred, find1Sig, xlabels, ePredLDict, varDic, cutStr
+from plotBinnedSigStr import getNLL, getBins, getPred, find1Sig, xlabels, ePredLDict, varDic, cutStr, drawCMSLogo, drawIntLumi
 
 
 legLabel = {
-    'nominal' : r'\textsc{MG}\xspace{}5\_a\textsc{mc@nlo},NNLOPS'
+    'nominal' : r'\textsc{MG}\xspace{}5\_a\textsc{mc@nlo}, \textsc{nnlops}'
 }
 
 def findUpDown(name, rge, nomVal, fidDic, totDic):
@@ -37,10 +37,10 @@ def main(options):
            'font.family': 'sans-serif',
            'font.sans-serif': ['Helvetica'],
            'pdf.fonttype': 42,
-           'axes.labelsize': 16,
+           'axes.labelsize': 20,
            'font.size': 16,
            'pgf.rcfonts': True,
-           'text.latex.preamble': r"\usepackage{bm, xspace, amsmath}"}
+           'text.latex.preamble': r"\usepackage{bm, xspace, amsmath, heppennames2}"}
 
     plt.rcParams.update(rcP)
     predColors = list(cm.Dark2.colors)
@@ -99,13 +99,13 @@ def main(options):
     yNLL  = np.array([NLLSpl(x/pred[0]) for x in xPred])
 
     print('Predicted xs: {} +{} -{}'.format(pred[0], uncUp*pred[0], uncDown*pred[0]))
-    pt.plot(xPred, yNLL, '-', color='black')
-    ylim = (0., 1.5*pt.get_ylim()[1])
-    pt.plot([pred[0], pred[0]], [ylim[0], ylim[1]], '-', color='red', label=legLabel['nominal'])
+    pt.plot(xPred, yNLL, '-', color='black', linewidth=3, zorder=6)
+    ylim = (0., 1.2*pt.get_ylim()[1])
+    pt.plot([pred[0], pred[0]], [ylim[0], 0.9*ylim[1]], '-', color='red', label=legLabel['nominal'], linewidth=3)
     pt.set_ylim(ylim)
-    pt.plot([(cval[0]-xrge)*pred[0], (cval[0]+xrge)*pred[0]], [1.,1.], '--', alpha=0.5, color='lightslategray')
-    pt.plot([pred[0]*(cval[0]-errs[0,0])]*2, [0., 1.], '--', alpha=0.5, color='lightslategray')
-    pt.plot([pred[0]*(cval[0]+errs[1,0])]*2, [0., 1.], '--', alpha=0.5, color='lightslategray')
+    pt.plot([(cval[0]-xrge)*pred[0], (cval[0]+xrge)*pred[0]], [1.,1.], '--', alpha=0.8, color='lightslategray', linewidth=3, zorder=5)
+    pt.plot([pred[0]*(cval[0]-errs[0,0])]*2, [0., 1.], '--', alpha=0.8, color='lightslategray', linewidth=3, zorder=5)
+    pt.plot([pred[0]*(cval[0]+errs[1,0])]*2, [0., 1.], '--', alpha=0.8, color='lightslategray', linewidth=3, zorder=5)
     pt.set_xlim([(cval[0]-xrge)*pred[0], (cval[0]+xrge)*pred[0]])
     pt.set_xlabel(r'\ensuremath{\boldsymbol{\sigma}_{\text{fid}}(\text{fb})}') #, loc='right')
     pt.set_ylabel(r'\ensuremath{-2\Delta\ln \text{L}}') #, loc='top')
@@ -118,7 +118,7 @@ def main(options):
     topLegHandles, topLegLabels = pt.get_legend_handles_labels()
     if options.showTheoryUnc:
         hatchstr = '/'*5
-        errPatch = matplotlib.patches.Rectangle((pred[0]*(1.-uncDown), ylim[0]), pred[0]*(uncUp+uncDown), ylim[0]+ylim[1], edgecolor='red', facecolor='None', hatch=hatchstr, linewidth=0, zorder=3)
+        errPatch = matplotlib.patches.Rectangle((pred[0]*(1.-uncDown), ylim[0]), pred[0]*(uncUp+uncDown), ylim[0]+0.9*ylim[1], edgecolor='red', facecolor='None', hatch=hatchstr, linewidth=0, zorder=3)
         pt.add_patch(errPatch)
 
         legPatch = matplotlib.patches.Patch(edgecolor=errPatch.get_edgecolor(), facecolor='None', hatch=hatchstr, linewidth=0, zorder=3)
@@ -134,8 +134,9 @@ def main(options):
     txtPos = cutText.get_window_extent().transformed(pt.transAxes.inverted())
     if legPos.x0/figsize[0] < 0.5:
         pt.legend(labels=topLegLabels, handles=topLegHandles, fontsize=14, framealpha=0, bbox_to_anchor=(txtPos.x0, txtPos.y0), loc='upper left', borderpad=0., handletextpad=0.1, borderaxespad=0.2, columnspacing=0.)
-    fig.text(0.13, 0.89, r'\textbf{CMS} \textit{Preliminary}', fontsize=15)
-    fig.text(1-0.29, 0.89, r'138\mbox{\ensuremath{\,\text{fb}^{-1}}}\xspace (13\ensuremath{\,\text{Te\hspace{-.08em}V}}\xspace)', fontsize=15)
+    if options.cmsText is not None:
+        drawCMSLogo(pt, opt=options.cmsText)
+    drawIntLumi(pt, intL=137)
     fig.savefig('{}/NLL_{}.png'.format(options.outDir, options.extension), bbox_inches='tight')
     fig.savefig('{}/NLL_{}.pdf'.format(options.outDir, options.extension), bbox_inches='tight')
 if __name__ == "__main__":
@@ -169,6 +170,7 @@ if __name__ == "__main__":
     optionalArgs.add_argument(
         '--showStat', action='store_true', default=False)
     optionalArgs.add_argument('--yLim', nargs='+', required=False, type=float)
+    optionalArgs.add_argument('--cmsText', action='store', type=str)
 
     options = parser.parse_args()
     main(options)
