@@ -1,0 +1,104 @@
+global:
+  fidXSFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/testThPred/theoryPred_PtInclusive_18_accVar.pkl'
+  totalXSFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/testThPred/theoryPred_PtInclusive_totalXS_18_accVar.pkl'
+  BRUnc: 0.0546
+
+Inclusive:
+  fNameFit: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_PtInclusive/higgsCombineDataScan_r0.MultiDimFit.mH125.38.root'
+  fNameFitStat: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_PtInclusive/higgsCombineDataScanStat_r0.MultiDimFit.mH125.38.root'
+  predFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_PtInclusive_18.pkl'
+  thErrFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_PtInclusive_18_ggH_theoryUnc.pkl'
+  bin: 0
+  extension: PtInclusive
+  label: '$\textnormal{Inclusive}$'
+
+InclusiveVBF:
+  fNameFit: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_PtInclusiveVBF/higgsCombineDataScan_r1.MultiDimFit.mH125.38.root'
+  fNameFitStat: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_PtInclusiveVBF/higgsCombineDataScanStat_r1.MultiDimFit.mH125.38.root'
+  predFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_PtInclusiveVBF_18.pkl'
+  thErrFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_PtInclusiveVBF_18_theoryUnc.pkl'
+  bin: 1
+  extension: PtInclusiveVBF
+  label: '$\textnormal{VBF-enriched}$'
+
+PtMiss1:
+  fNameFit: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_PtMiss/higgsCombineDataScan_r1.MultiDimFit.mH125.38.root'
+  fNameFitStat: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_PtMiss/higgsCombineDataScanStat_r1.MultiDimFit.mH125.38.root'
+  predFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_PtMiss_18.pkl'
+  thErrFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_PtMiss_18_ggH_theoryUnc.pkl'
+  bin: 1
+  extension: PtMiss
+  label: '$100~\textnormal{GeV}<p_{\mathrm{T}}^{\mathrm{miss}}\leq200~\textnormal{GeV}$'
+
+PtMiss2:
+  fNameFit: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_PtMiss/higgsCombineDataScan_r2.MultiDimFit.mH125.38.root'
+  fNameFitStat: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_PtMiss/higgsCombineDataScanStat_r2.MultiDimFit.mH125.38.root'
+  predFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_PtMiss_18.pkl'
+  thErrFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_PtMiss_18_ggH_theoryUnc.pkl'
+  bin: 2
+  extension: PtMiss
+  label: '$p_{\mathrm{T}}^{\mathrm{miss}}>200~\textnormal{GeV}$'
+  
+NBjets1:
+  fNameFit: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_NBjets2p5/higgsCombineDataScan_r1.MultiDimFit.mH125.38.root'
+  fNameFitStat: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_NBjets2p5/higgsCombineDataScanStat_r1.MultiDimFit.mH125.38.root'
+  predFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_NBjets2p5_18.pkl'
+  thErrFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_NBjets2p5_18_ggH_theoryUnc.pkl'
+  bin: 1
+  extension: NBjets2p5
+  label: '$n_{\mathrm{bjets}}=1$'
+
+NBjets2:
+  fNameFit: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_NBjets2p5/higgsCombineDataScan_r2.MultiDimFit.mH125.38.root'
+  fNameFitStat: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_NBjets2p5/higgsCombineDataScanStat_r2.MultiDimFit.mH125.38.root'
+  predFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_NBjets2p5_18.pkl'
+  thErrFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_NBjets2p5_18_ggH_theoryUnc.pkl'
+  bin: 2
+  extension: NBjets2p5
+  label: '$n_{\mathrm{bjets}}\geq2$'
+
+Nlepton1:
+  fNameFit: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_Nleptons/higgsCombineDataScan_r1.MultiDimFit.mH125.38.root'
+  fNameFitStat: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_Nleptons/higgsCombineDataScanStat_r1.MultiDimFit.mH125.38.root'
+  predFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_Nleptons_18.pkl'
+  thErrFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_Nleptons_18_ggH_theoryUnc.pkl'
+  bin: 1
+  extension: Nleptons
+  label: '$n_{\mathrm{leptons}}=1$'
+
+Nlepton2:
+  fNameFit: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_Nleptons/higgsCombineDataScan_r2.MultiDimFit.mH125.38.root'
+  fNameFitStat: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_Nleptons/higgsCombineDataScanStat_r2.MultiDimFit.mH125.38.root'
+  predFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_Nleptons_18.pkl'
+  thErrFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_Nleptons_18_ggH_theoryUnc.pkl'
+  bin: 2
+  extension: Nleptons
+  label: '$n_{\mathrm{leptons}}\geq2$'
+
+PtInclusive1L1B:
+  fNameFit: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_PtInclusive1L1B/higgsCombineDataScan_r1.MultiDimFit.mH125.38.root'
+  fNameFitStat: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_PtInclusive1L1B/higgsCombineDataScanStat_r1.MultiDimFit.mH125.38.root'
+  predFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_PtInclusive1L1B_18.pkl'
+  bin: 1
+  thErrFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_PtInclusive1L1B_18_ggH_theoryUnc.pkl'
+  extension: PtInclusive1L1B
+  label: '$n_{\mathrm{leptons}}\geq1$, $n_{\mathrm{bjets}}\geq1$'
+
+PtInclusive1LHPtM:
+  fNameFit: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_PtInclusive1LHPtM/higgsCombineDataScan_r1.MultiDimFit.mH125.38.root'
+  fNameFitStat: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_PtInclusive1LHPtM/higgsCombineDataScanStat_r1.MultiDimFit.mH125.38.root'
+  predFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_PtInclusive1LHPtM_18.pkl'
+  bin: 1
+  thErrFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_PtInclusive1LHPtM_18_ggH_theoryUnc.pkl'
+  extension: PtInclusive1LHPtM
+  label: '$n_{\mathrm{leptons}}=1$, $p_{\mathrm{T}}^{\mathrm{miss}}>100~\textnormal{GeV}$'
+
+PtInclusive1LLPtM:
+  fNameFit: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_PtInclusive1LLPtM/higgsCombineDataScan_r1.MultiDimFit.mH125.38.root'
+  fNameFitStat: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_PtInclusive1LLPtM/higgsCombineDataScanStat_r1.MultiDimFit.mH125.38.root'
+  predFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_PtInclusive1LLPtM_18.pkl'
+  thErrFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_PtInclusive1LLPtM_18_ggH_theoryUnc.pkl'
+  bin: 1
+  extension: PtInclusive1LLPtM
+  label: '$n_{\mathrm{leptons}}=1$, $p_{\mathrm{T}}^{\mathrm{miss}}\leq100~\textnormal{GeV}$'
+

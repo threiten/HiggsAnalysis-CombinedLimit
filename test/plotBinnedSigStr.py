@@ -664,10 +664,11 @@ def main(options):
         
         if cappedOverflow[i] and options.extension not in ['Njets2p5', 'NBjets2p5', 'Nleptons']:
             yPos = max([obsed[i][-1]+obsedErrs[i][1][-1]] + [pred[i][-1]] + [extraPred[k][i][-1] for k in range(len(extraPred))])
+            yMv = -0.15 if options.extension == 'PtNjets2p5' else 0.25
             if isinstance(xlb, tuple):
-                fig.text(bcen[i][-1]+0.5*xerrs[i][-1], 1.1*yPos, r'$\boldsymbol{{\sigma_{{\mathrm{{fid}}}}\left({{{0}}}>{{{1}}}\,\textnormal{{{2}}}\right)/{{{3:.1f}}}\,\textnormal{{{2}}}}}$'.format(xlb[0], binns[i][-2], xlb[1], binns[i][-1] - binns[i][-2]), fontsize=10, transform=tops[i].transData, va='bottom', rotation=90) #-xerrs[i][-1]
+                fig.text(bcen[i][-1]+yMv*xerrs[i][-1], 1.15*yPos, r'$\boldsymbol{{\frac{{\sigma_{{\mathrm{{fid}}}}\left({{{0}}}>{{{1}}}\,\textnormal{{{2}}}\right)}}{{{{{3:.1f}}}\,\textnormal{{{2}}}}}}}$'.format(xlb[0], binns[i][-2], xlb[1], binns[i][-1] - binns[i][-2]), fontsize=16, transform=tops[i].transData, va='bottom', rotation=90) #-xerrs[i][-1]
             else:
-                fig.text(bcen[i][-1]+0.5*xerrs[i][-1], 1.1*yPos, r'$\boldsymbol{{\sigma_{{\mathrm{{fid}}}}\left({{{0}}}>{{{1}}}\right)/{{{2:.1f}}}}}$'.format(xlb, binns[i][-2], binns[i][-1] - binns[i][-2]), fontsize=10, transform=tops[i].transData, va='bottom', rotation=90 )
+                fig.text(bcen[i][-1]+yMv*xerrs[i][-1], 1.15*yPos, r'$\boldsymbol{{\frac{{\sigma_{{\mathrm{{fid}}}}\left({{{0}}}>{{{1}}}\right)}}{{{{{2:.1f}}}}}}}$'.format(xlb, binns[i][-2], binns[i][-1] - binns[i][-2]), fontsize=16, transform=tops[i].transData, va='bottom', rotation=90 )
 
         lowYlim = tops[i].get_ylim()[0]
         print(lowYlim)
@@ -779,7 +780,7 @@ def main(options):
     textPos = cutText.get_window_extent().transformed(tops[0].transAxes.inverted())
     axPosZero = tops[0].get_position()
     if options.showPvalue:
-        pvaltxt = fig.text(legPosFig.x0+0.01, legPosFig.y0-0.005, r'p-value(SM): $\boldsymbol{{{{{:.3f}}}}}$'.format(pvalSMCompat), fontsize=14, va='top', bbox=dict(fc='white', alpha=0.8, edgecolor='None'), transform=fig.transFigure) #(legPos.x0/figsize[0])+0.1, min(textPos.y0/figsize[1]-0.01, legPos.y0/figsize[1]-0.01)
+        pvaltxt = fig.text(legPosFig.x0+0.01, legPosFig.y0-0.005, r'p-value(nominal SM): $\boldsymbol{{{{{:.3f}}}}}$'.format(pvalSMCompat), fontsize=14, va='top', bbox=dict(fc='white', alpha=0.8, edgecolor='None'), transform=fig.transFigure) #(legPos.x0/figsize[0])+0.1, min(textPos.y0/figsize[1]-0.01, legPos.y0/figsize[1]-0.01)
         pvaltxtPos = pvaltxt.get_window_extent().transformed(tops[-1].transAxes.inverted())
         print('pvaltxtPos:', pvaltxtPos)
     if topLvl is not None:
