@@ -180,15 +180,20 @@ def main(options):
     pt.set_xticks(yPoss)
     pt.set_xticklabels(tckLbls, rotation=90)
     # pt.invert_xaxis()
-    pt.set_yscale('log')
+    if options.ylog:
+        pt.set_yscale('log')
     pt.set_ylabel(r'$\boldsymbol{\sigma_{\text{fid}}}\left(\textnormal{fb}\right)$', loc='top')
-    pt.set_ylim((pt.get_ylim()[0], 10**1.3*np.max(cvPlot+errsPlot[1,:])))
+    if options.ylog:
+        pt.set_ylim((pt.get_ylim()[0], 10**1.3*np.max(cvPlot+errsPlot[1,:])))
+    else:
+        pt.set_ylim((pt.get_ylim()[0], 1.3*pt.get_ylim()[1]))
     pt.text(0.01, 0.97, cutStr['Pt'], fontsize=20, va='top', ha='left', transform=pt.transAxes)
     if options.cmsText is not None:
         drawCMSLogo(pt, opt=options.cmsText, fs=28)
     drawIntLumi(pt, intL=137, fs=28)
-    fig.savefig('{}/plotFidXS_flipped.png'.format(options.outDir), bbox_inches='tight')
-    fig.savefig('{}/plotFidXS_flipped.pdf'.format(options.outDir), bbox_inches='tight')
+    suff = '_linear' if not options.ylog else ''
+    fig.savefig('{}/plotFidXS_flipped{}.png'.format(options.outDir, suff), bbox_inches='tight')
+    fig.savefig('{}/plotFidXS_flipped{}.pdf'.format(options.outDir, suff), bbox_inches='tight')
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -209,8 +214,8 @@ if __name__ == "__main__":
     #     '--commonPredComp', action='store', type=str)
     # optionalArgs.add_argument(
     #     '--cap', '-c', action='store', type=float)
-    # optionalArgs.add_argument(
-    #     '--ylog', action='store_true', default=False)
+    optionalArgs.add_argument(
+         '--ylog', action='store_true', default=False)
     optionalArgs.add_argument(
         '--dumpData', action='store_true', default=False)
     # optionalArgs.add_argument(

@@ -3,14 +3,14 @@ global:
   totalXSFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/testThPred/theoryPred_PtInclusive_totalXS_18_accVar.pkl'
   BRUnc: 0.0546
 
-Inclusive:
-  fNameFit: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_PtInclusive/higgsCombineDataScan_r0.MultiDimFit.mH125.38.root'
-  fNameFitStat: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_PtInclusive/higgsCombineDataScanStat_r0.MultiDimFit.mH125.38.root'
-  predFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_PtInclusive_18.pkl'
-  thErrFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_PtInclusive_18_ggH_theoryUnc.pkl'
-  bin: 0
-  extension: PtInclusive
-  label: '$\textnormal{Inclusive}$'
+#Inclusive:
+#  fNameFit: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_PtInclusive/higgsCombineDataScan_r0.MultiDimFit.mH125.38.root'
+#  fNameFitStat: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_PtInclusive/higgsCombineDataScanStat_r0.MultiDimFit.mH125.38.root'
+#  predFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_PtInclusive_18.pkl'
+#  thErrFile: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/theoryPred_PtInclusive_18_ggH_theoryUnc.pkl'
+#  bin: 0
+#  extension: PtInclusive
+#  label: '$\textnormal{Inclusive}$'
 
 InclusiveVBF:
   fNameFit: '/afs/cern.ch/work/t/threiten/Hgg/Differentials/newCombine/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/test/afterPreApp/outdir_differential_PtInclusiveVBF/higgsCombineDataScan_r1.MultiDimFit.mH125.38.root'
